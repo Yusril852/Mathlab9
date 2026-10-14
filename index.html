@@ -331,7 +331,10 @@ function generateQuestion({key,level,seed=0}){const r=rng(hash(key+level)+seed*9
 const GS=new Set;let built=0;const dk=q=>q.pertanyaan+(q.pairs?JSON.stringify(q.pairs):'')+(q.gambar||'');
 function mkBank(k,L){const out=[];for(let t=0;out.length<25&&t<1500;t++){const q=generateQuestion({key:k,level:L,seed:t});if(!q||GS.has(dk(q)))continue;GS.add(dk(q));q.id=idOf(k,L,out.length+1);out.push(q)}return out}
 function bank(k,L){if(!built){built=1;[...KEYS.filter(x=>!G[x].m),...KEYS.filter(x=>G[x].m)].forEach(x=>[1,2,3].forEach(l=>cache[x+'-'+l]=mkBank(x,l)))}return cache[k+'-'+L]}
-const findQ=id=>{const m=id.match(/B(\d+)S(\d+)-L(\d)-(\d+)/);return m?bank((m[1]-1)+'.'+(m[2]-1),+m[3])[m[4]-1]:null};
+const findQ=id=>{const m=String(id).match(/B(\d+)S(\d+)-L(\d)-(s?)(\d+)/);if(!m)return null;const k=(m[1]-1)+'.'+(m[2]-1),L=+m[3];if(m[4]){if(!G[k])return null;try{const q=generateQuestion({key:k,level:L,seed:+m[5]});if(q)q.id=id;return q}catch(e){return null}}return bank(k,L)[m[5]-1]};
+/* latihan: 25 soal baru tiap mulai (seed acak). id "-s<seed>" bisa dibangkitkan ulang oleh findQ */
+const PREV={};
+function freshSet(k,L){const pk=k+'-'+L,prev=PREV[pk]||new Set,seen=new Set,out=[];for(let t=0;out.length<25&&t<3000;t++){const seed=2000+Math.floor(Math.random()*9e8);let q=null;try{q=generateQuestion({key:k,level:L,seed})}catch(e){}if(!q)continue;q.id=idOf(k,L,0).slice(0,-3)+'s'+seed;const d=dk(q);if(seen.has(d)||(t<1500&&prev.has(d))||validateQuestion(q).length)continue;seen.add(d);out.push(q)}if(out.length<25)bank(k,L).forEach(q=>{if(out.length<25&&!seen.has(dk(q))){seen.add(dk(q));out.push(q)}});PREV[pk]=seen;return out}
 function validateQuestion(q){const e=[];if(!q.id)e.push('ID kosong');if(![1,2,3].includes(q.level))e.push('level tidak valid');if(!B.some(b=>b.n==q.bab&&b.s.includes(q.subBab)))e.push('bab/sub-bab tidak valid');
  if(!q.pertanyaan||/undefined|NaN/.test(q.pertanyaan+q.pilihan+q.pembahasan+(q.gambar||'')))e.push('soal malformed');if(!q.pembahasan)e.push('pembahasan kosong');if(q.gambar&&!q.gambar.startsWith('<svg'))e.push('gambar tidak valid');
  if(!q.jawaban)e.push('jawaban kosong');const T=q.tipe;
@@ -407,12 +410,12 @@ function go(v,m){if(v!='guru')tStop();clearInterval(tm);V=v;M=m===undefined?null
 function toast(t){const d=document.createElement('div');d.textContent=t;d.style.cssText='position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#1d2455;color:#fff;padding:10px 18px;border-radius:14px;font-weight:700;z-index:9';document.body.append(d);setTimeout(()=>d.remove(),1800)}
 
 /* ===== MODE LATIHAN (berurutan) / ULANGAN (acak, Fisher-Yates) ===== */
-function start(k,L){S.last={k,L};P={mode:'prac',qs:bank(k,L),i:0,pk:[],k,L,run:0};go('play')}
+function start(k,L){S.last={k,L};P={mode:'prac',qs:freshSet(k,L),i:0,pk:[],k,L,run:0};go('play')}
 function startRetry(){const qs=S.wrong.map(findQ).filter(Boolean);if(!qs.length)return toast('Belum ada soal yang salah 🎉');P={mode:'retry',qs,i:0,pk:[],run:0};go('play')}
 function startExam(){const pool=[];X.ch.forEach(b=>KEYS.filter(k=>k.startsWith(b+'.')).forEach(k=>X.lv.forEach(L=>pool.push(...bank(k,L)))));
  if(!pool.length)return toast('Pilih bab & level yang memiliki soal');const qs=sh(pool).slice(0,X.n).map(q=>({...q,pilihan:q.tipe=='multiple_choice'||q.tipe=='matching'?sh(q.pilihan):q.pilihan}));
  P={mode:'exam',qs,i:0,pk:[],run:0,left:X.t*60};go('play');if(X.t)tm=setInterval(()=>{P.left--;const e=$('#tm');if(e)e.textContent=Math.floor(P.left/60)+':'+String(P.left%60).padStart(2,'0');if(P.left<=0)finish()},1000)}
-function record(q,ok){S.att.push({qid:q.id,k:q.key,ok,t:Date.now()});if(!S.days.includes(td()))S.days.push(td());if(ok){S.xp+=q.level*10;S.wrong=S.wrong.filter(x=>x!=q.id)}else if(!S.wrong.includes(q.id))S.wrong.push(q.id)}
+function record(q,ok){S.att.push({qid:q.id,k:q.key,ok,t:Date.now()});if(!S.days.includes(td()))S.days.push(td());if(ok){S.xp+=q.level*10;S.wrong=S.wrong.filter(x=>x!=q.id)}else if(!S.wrong.includes(q.id)){S.wrong.push(q.id);if(S.wrong.length>60)S.wrong.shift()}}
 function pick(j){if(P.pk[P.i]!=null)return;P.pk[P.i]=j;const q=P.qs[P.i],ok=isOk(q,j);if(P.mode!='exam'){record(q,ok);P.run=ok?P.run+1:0;if(P.run==10){S.xp+=50;toast('🔥 10 benar berturut-turut! +50 XP')}save()}render()}
 function next(){P.i<P.qs.length-1?(P.i++,render(),scrollTo(0,0)):finish()}
 function finish(){clearInterval(tm);const n=P.qs.length,ok=P.qs.filter((q,i)=>isOk(q,P.pk[i])).length,sc=Math.round(ok/n*100);
@@ -480,7 +483,7 @@ dash(){const t=S.att.length,ok=S.att.filter(x=>x.ok).length,a=t?Math.round(ok/t*
  <h2>Sedang dipelajari</h2><div class=card>${L?`<b>📘 ${sn(L.k)}</b> · Level ${L.L}<p class=mu>${done} level sudah dicoba</p><button class=btn onclick="start('${L.k}',${L.L})">Lanjutkan latihan</button>`:`<b>Belum ada latihan</b><p class=mu>Mulai dari Bab 1 — Bilangan Berpangkat.</p><button class=btn onclick="start('0.0',1)">Mulai Level 1</button>`}</div>
  <h2>Rekomendasi</h2><div class=card>${weak?`Kamu masih sering salah pada <b>${sn(weak[0])}</b>. <br><button class="btn y" style="margin-top:8px" onclick="start('${weak[0]}',1)">Latihan sekarang</button>`:'Kerjakan beberapa latihan agar rekomendasi muncul.'}</div>
  <div class=card class=row><b>🔁 Soal yang perlu dipelajari lagi: ${S.wrong.length}</b><br><button class="btn s" style="margin-top:8px" onclick="startRetry()">Latihan soal yang salah</button></div>`},
-mat(){if(M==null)return`<h1>📚 Materi & Latihan</h1><p class=mu>Pilih bab. Latihan selalu berurutan, soal 1 sampai 25.</p>`+B.map(b=>{const n=KEYS.filter(k=>k.startsWith(b.i+'.')).length;return`<div class=card style="cursor:pointer" onclick="go('mat',${b.i})"><b>${IC[b.i]} Bab ${b.i+1} — ${b.n}</b><div class=mu>${b.s.length} sub-bab · ${n?n+' sub-bab dengan bank soal aktif':'bank soal segera hadir'}</div></div>`}).join('');
+mat(){if(M==null)return`<h1>📚 Materi & Latihan</h1><p class=mu>Pilih bab. Setiap latihan berisi 25 soal baru yang diacak ulang setiap kali dimulai.</p>`+B.map(b=>{const n=KEYS.filter(k=>k.startsWith(b.i+'.')).length;return`<div class=card style="cursor:pointer" onclick="go('mat',${b.i})"><b>${IC[b.i]} Bab ${b.i+1} — ${b.n}</b><div class=mu>${b.s.length} sub-bab · ${n?n+' sub-bab dengan bank soal aktif':'bank soal segera hadir'}</div></div>`}).join('');
  const b=B[M];return`<button class="btn s" onclick="go('mat')">← Semua bab</button><h2>${IC[M]} Bab ${M+1} — ${b.n}</h2>`+b.s.map((s,j)=>{const k=M+'.'+j;return`<div class=card><b>${s}</b><br>${G[k]?[1,2,3].map(L=>{const x=best(k,L);return`<button class=chip onclick="start('${k}',${L})">${x==null?'⚪':mast(x)[0]} Level ${L} · ${LN[L]}${x!=null?' · '+x+'%':''}</button>`}).join(''):'<span class=mu>Segera hadir (struktur siap, generator belum dibuat)</span>'}</div>`}).join('')},
 play(){const q=P.qs[P.i],a=P.pk[P.i],ex=P.mode=='exam',ans=a!=null&&!ex;
  return`<div class="row sp"><b>${ex?'📝 Ulangan':P.mode=='retry'?'🔁 Latihan soal salah':'Bab '+(+P.k[0]+1)+' · '+sn(P.k)}</b>${ex&&P.left!=null&&X.t?`<b id=tm>${Math.floor(P.left/60)}:${String(P.left%60).padStart(2,'0')}</b>`:''}</div>
