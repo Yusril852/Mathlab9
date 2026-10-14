@@ -1,5 +1,5 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>MathLab IX</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<!doctype html><html lang="id" data-theme="royal"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>MathLab IX</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1d2455;--bg:#f5f6ff;--card:#fff;--ln:#e1e4f7;--y:#ffc233;--g:#27b98a;--r:#ff5d6c;--b:#4a5bff;--m:#6b7099;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#eef0ff;--bg:#141838;--card:#1f2551;--ln:#2e3670;--m:#a5abd6}}
@@ -27,7 +27,76 @@ details{margin-top:6px}summary{cursor:pointer;color:var(--b);font-weight:700}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 body.lp #sb{display:none}body.lp main{padding-bottom:24px}.who{font-weight:700;margin:-6px 0 10px;color:var(--m)}@media(max-width:800px){#sb .who{display:none}}
 .tb{width:100%;border-collapse:collapse;min-width:640px}.tb th,.tb td{text-align:left;padding:8px 10px;border-bottom:2px solid var(--ln)}.tb tr.rw{cursor:pointer}.tb tr.rw:hover{background:var(--bg)}@media(max-width:800px){#sb{overflow-x:auto}#sb button{flex:none}}
-</style></head><body><nav id="sb"></nav><main id="app"></main>
+
+/* ===== 4 tema: royal, aurora, carnival, emerald ===== */
+:root[data-theme=royal]{--ink:#1c1840;--bg:#faf5ea;--card:#fffdf8;--ln:#eadfc2;--b:#4a2fbd;--m:#6a6585;--y:#e8b53a;--g:#1fae6b;--r:#e5484d;--bgr:linear-gradient(135deg,#3b27a8,#6a3df0);--bsh:#231570;--bt:#fff;--sbg:linear-gradient(180deg,#1a1245,#2d1b69);--sbt:#cfc8ee;--sbo:linear-gradient(135deg,#f6d77a,#d4a017);--sbx:#2a1d00;--hd:linear-gradient(135deg,#1a1245,#3a1f9a 55%,#6a3df0);--o1:#c9b6ff;--o2:#ffd98a;--lbg:radial-gradient(120% 80% at 50% 0%,#3a1f9a 0%,#1a1245 60%,#0d0828 100%);--fh:'Playfair Display',Georgia,serif;--oo:.45;color-scheme:light}
+:root[data-theme=aurora]{--ink:#e9f1ff;--bg:#070b1f;--card:#101a3a;--ln:#22306a;--b:#22d3ee;--m:#9db0e0;--y:#fbbf24;--g:#34d399;--r:#fb7185;--bgr:linear-gradient(135deg,#06b6d4,#8b5cf6);--bsh:#3b1a8a;--bt:#fff;--sbg:linear-gradient(180deg,#0b1230,#140a38);--sbt:#a9bbea;--sbo:linear-gradient(135deg,#06b6d4,#8b5cf6);--sbx:#fff;--hd:linear-gradient(135deg,#0ea5e9,#7c3aed 55%,#db2777);--o1:#22d3ee;--o2:#a855f7;--lbg:radial-gradient(120% 80% at 50% 0%,#4c1d95 0%,#0b1230 65%,#050816 100%);--fh:'Baloo 2',Nunito,sans-serif;--oo:.3;color-scheme:dark}
+:root[data-theme=carnival]{--ink:#3b1450;--bg:#fff4fb;--card:#fff;--ln:#ffd3ec;--b:#ff3d8b;--m:#7d5a8f;--y:#ffd23f;--g:#20c997;--r:#ff4d4d;--bgr:linear-gradient(135deg,#ff3d8b,#ff8a3d);--bsh:#b3175f;--bt:#fff;--sbg:linear-gradient(180deg,#ff3d8b,#8b2fc9);--sbt:#ffe6f5;--sbo:#fff;--sbx:#8b2fc9;--hd:linear-gradient(135deg,#ff3d8b,#c026d3 55%,#7c3aed);--o1:#ff9ad5;--o2:#ffe066;--lbg:radial-gradient(120% 80% at 50% 0%,#ff3d8b 0%,#8b2fc9 60%,#3b1450 100%);--fh:'Baloo 2',Nunito,sans-serif;--oo:.5;color-scheme:light}
+:root[data-theme=emerald]{--ink:#f3efe0;--bg:#06201a;--card:#0d3329;--ln:#1b5a48;--b:#d4af37;--m:#a9cbbd;--y:#f6d77a;--g:#34d399;--r:#fb7185;--bgr:linear-gradient(135deg,#f6d77a,#c9972b);--bsh:#7a5a10;--bt:#1a1400;--sbg:linear-gradient(180deg,#041a15,#0a2e25);--sbt:#a9cbbd;--sbo:linear-gradient(135deg,#f6d77a,#c9972b);--sbx:#1a1400;--hd:linear-gradient(135deg,#065f46,#0f766e 55%,#b8860b);--o1:#10b981;--o2:#d4af37;--lbg:radial-gradient(120% 80% at 50% 0%,#0f6b52 0%,#06201a 65%,#021410 100%);--fh:'Playfair Display',Georgia,serif;--oo:.28;color-scheme:dark}
+:root{--gold:linear-gradient(135deg,#f6d77a,#d4a017 55%,#b8860b)}
+body{background:var(--bg);position:relative;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;z-index:-1;width:60vmax;height:60vmax;border-radius:50%;filter:blur(80px);opacity:var(--oo);pointer-events:none;animation:drift 22s ease-in-out infinite alternate}
+body::before{top:-20vmax;left:-15vmax;background:radial-gradient(circle,var(--o1),transparent 65%)}
+body::after{bottom:-25vmax;right:-15vmax;background:radial-gradient(circle,var(--o2),transparent 65%);animation-delay:-8s}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+@keyframes flo{50%{transform:translateY(-8px) rotate(6deg)}}
+@keyframes sheen{60%,100%{transform:translateX(100%)}}
+@keyframes shim{to{background-position:-200% 0}}
+h1,h2,#sb .lg,.f{font-family:var(--fh)}
+#sb{background:var(--sbg);border:0;box-shadow:6px 0 28px rgba(0,0,0,.25)}
+#sb .lg{color:#fff}#sb .who{color:var(--sbt)}
+#sb button{color:var(--sbt);transition:.2s}#sb button.on,#sb button:hover{background:var(--sbo);color:var(--sbx);box-shadow:0 0 18px rgba(255,255,255,.2)}
+@media(max-width:800px){#sb{background:var(--sbg);border:0;box-shadow:0 -6px 24px rgba(0,0,0,.3)}}
+.card{border-radius:22px;box-shadow:0 10px 30px -14px rgba(0,0,0,.35);transition:transform .25s,box-shadow .25s;animation:rise .35s both}
+.grid .card:hover,.card[onclick]:hover{transform:translateY(-5px);box-shadow:0 18px 38px -14px rgba(0,0,0,.45)}
+.hero9{background:var(--hd);color:#fff;border:0;position:relative;overflow:hidden;box-shadow:0 22px 50px -18px rgba(0,0,0,.6)}
+.hero9::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.25) 48%,transparent 66%);transform:translateX(-100%);animation:sheen 5s ease-in-out infinite;pointer-events:none}
+.hero9 .f{text-shadow:0 4px 18px rgba(0,0,0,.35)}
+.btn{background:var(--bgr);color:var(--bt);box-shadow:0 5px 0 var(--bsh),0 12px 24px -10px rgba(0,0,0,.5);position:relative;overflow:hidden;transition:transform .15s,filter .2s}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-2px)}.btn:hover::after{left:130%}.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--bsh)}
+.btn.y{background:var(--gold);color:#2a1d00;box-shadow:0 5px 0 #8a6508}
+.btn.dng{background:linear-gradient(135deg,#e5484d,#b4232a);color:#fff;box-shadow:0 5px 0 #7d1319}
+.bar{height:14px}.bar i{background:linear-gradient(90deg,var(--g),var(--y),var(--g));background-size:200% 100%;animation:shim 2.5s linear infinite}
+.opt{transition:.2s}.opt:hover{transform:translateY(-3px);box-shadow:0 8px 20px -8px rgba(0,0,0,.45)}
+.chip{transition:.2s}.chip:hover{transform:translateY(-2px)}
+.kel{border:2px dashed var(--r)}.kel .row{gap:12px}
+.tb th{color:var(--m)}
+#thm{position:fixed;right:14px;bottom:14px;z-index:20}
+.thb{all:unset;cursor:pointer;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:1.4rem;background:var(--bgr);color:var(--bt);box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.thp{display:none;position:absolute;right:0;bottom:56px;background:var(--card);border:2px solid var(--ln);border-radius:18px;padding:8px;min-width:170px;box-shadow:0 14px 34px rgba(0,0,0,.4)}#thm.open .thp{display:block}
+.thp button{all:unset;cursor:pointer;display:flex;gap:8px;align-items:center;width:100%;padding:9px 10px;border-radius:12px;font-weight:700;color:var(--ink);box-sizing:border-box}.thp button:hover,.thp button.on{background:var(--bg)}.thp button.on{outline:2px solid var(--b)}
+@media(max-width:800px){#thm{bottom:78px}}
+/* leaderboard */
+.lbw{margin:26px auto 8px;padding:22px 16px 18px;border-radius:30px;color:#fff;position:relative;overflow:hidden;background:var(--lbg);border:1px solid rgba(246,215,122,.55);box-shadow:0 30px 60px -20px rgba(0,0,0,.7),inset 0 0 60px rgba(246,215,122,.08)}
+.lbw::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.7;animation:tw 3s ease-in-out infinite alternate;background:radial-gradient(circle at 20% 15%,#fff 0 1px,transparent 2px),radial-gradient(circle at 80% 25%,#fff 0 1px,transparent 2px),radial-gradient(circle at 60% 10%,#f6d77a 0 1.5px,transparent 2.5px),radial-gradient(circle at 35% 40%,#fff 0 1px,transparent 2px),radial-gradient(circle at 90% 60%,#f6d77a 0 1px,transparent 2px)}
+@keyframes tw{to{opacity:.25}}
+.lbh{text-align:center;position:relative;margin-bottom:18px}.lbh span{font-size:2rem;display:block;animation:flo 3s ease-in-out infinite}
+.lbh h2{margin:0;font-size:1.9rem;letter-spacing:3px;text-transform:uppercase;background:var(--gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lbh small{color:#e0dbf5;letter-spacing:2px;font-size:.75rem;text-transform:uppercase}
+#lb{position:relative}#lb .mu{color:#e0dbf5}
+.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:8px;align-items:end;margin-bottom:16px}
+.pd{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0;animation:up .7s cubic-bezier(.2,.9,.3,1.2) both;animation-delay:var(--d)}.pd.ph{visibility:hidden}
+@keyframes up{from{opacity:0;transform:translateY(60px)}}
+.pcr{font-size:1.8rem;height:2.2rem;animation:flo 2.6s ease-in-out infinite;filter:drop-shadow(0 0 10px #f6d77a)}
+.pav{position:relative;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font:800 1.6rem 'Playfair Display',serif;color:#1a1245;margin:2px 0 6px;border:3px solid #fff}
+.pav i{position:absolute;right:-10px;bottom:-8px;font-size:1.5rem;font-style:normal}
+.p1 .pav{width:84px;height:84px;font-size:2.1rem;background:var(--gold);box-shadow:0 0 0 4px rgba(246,215,122,.35),0 0 40px rgba(246,215,122,.8);animation:glow 2.2s ease-in-out infinite alternate}
+@keyframes glow{to{box-shadow:0 0 0 8px rgba(246,215,122,.2),0 0 60px rgba(246,215,122,1)}}
+.p2 .pav{background:linear-gradient(135deg,#f4f6fa,#a9b3c4);box-shadow:0 0 24px rgba(200,210,230,.6)}
+.p3 .pav{background:linear-gradient(135deg,#f0c39a,#b86f35);box-shadow:0 0 24px rgba(205,127,50,.6)}
+.pnm{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.95rem}.p1 .pnm{font-size:1.1rem;color:#f6d77a}
+.pcl{font-size:.68rem;color:#e0dbf5;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pxp{font:800 1.15rem 'Baloo 2',sans-serif;margin:4px 0 6px}.pxp small{font-size:.65rem;margin-left:3px;opacity:.8}
+.pbk{width:100%;display:grid;place-items:center;border-radius:14px 14px 0 0;font:800 2.2rem 'Playfair Display',serif;color:rgba(26,18,69,.85)}
+.p1 .pbk{height:120px;background:linear-gradient(180deg,#f6d77a,#b8860b)}.p2 .pbk{height:88px;background:linear-gradient(180deg,#eef1f6,#9aa5b8)}.p3 .pbk{height:64px;background:linear-gradient(180deg,#f0b27a,#a8642b)}
+.lr{display:flex;align-items:center;gap:12px;padding:10px 14px;margin-top:8px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);animation:up .5s both;animation-delay:calc(.7s + var(--d));transition:.2s}
+.lr:hover{background:rgba(246,215,122,.16);transform:translateX(4px)}
+.rk{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(246,215,122,.2);color:#f6d77a;font-size:.9rem}
+.rn{flex:1;min-width:0;display:flex;flex-direction:column}.rn b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rn small{color:#e0dbf5;font-size:.72rem}.rx{color:#f6d77a;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style></head><body><nav id="sb"></nav><main id="app"></main><div id=thm></div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
@@ -364,18 +433,31 @@ function subM(){const v=P.qs[P.i].pairs.map((p,i)=>$('#mt'+i).value);if(v.includ
 /* ===== VIEWS ===== */
 const bar=p=>`<div class="bar"><i style="width:${p}%"></i></div>`;
 function acc(f){const a=S.att.filter(f);return a.length?Math.round(a.filter(x=>x.ok).length/a.length*100):0}
-let GU=0,GK=null,GC=0,GL=[];
+let GU=0,GADM=0,GK=null,GC=0,GL=[];const GURU_PIN='123456',ADMIN='ysril852@gmail.com';
 const lvOf=id=>+((id||'').match(/-L(\d)-/)||[0,0])[1],bbOf=k=>+String(k).split('.')[0],pc=(a,b)=>b?Math.round(a/b*100):null,tc=p=>p==null?'<span class=mu>–</span>':mast(p)[0]+' '+p+'%';
 const stk=D=>{let n=0,d=new Date();const h=x=>D.includes(td(x));if(!h(d))d.setDate(d.getDate()-1);while(h(d)){n++;d.setDate(d.getDate()-1)}return n};
 const ac=(u,f)=>{const a=u.att.filter(f);return[a.filter(x=>x.ok).length,a.length]};
 const avg=u=>u.res.length?Math.round(u.res.reduce((s,r)=>s+r.sc,0)/u.res.length):null;
 const gbar=(t,p,n)=>`<div class=card><div class="row sp"><b>${t}</b><span>${tc(p)}${n!=null?' · '+n+' soal':''}</span></div>${bar(p||0)}</div>`;
-const ghead=()=>`<div class="row sp"><h1>👩‍🏫 Dashboard Guru</h1><div class=row><button class="btn s" onclick="render()">🔄 Muat ulang</button><button class="btn s" onclick="gBack()">Keluar mode guru</button></div></div><p class=mu>Data dibaca dari perangkat ini saja.</p>`;
+const ghead=()=>`<div class="row sp"><h1>👩‍🏫 Dashboard Guru</h1><div class=row><button class="btn s" onclick="render()">🔄 Muat ulang</button><button class="btn s" onclick="gBack()">Keluar mode guru</button></div></div><p class=mu>${FBON?'Data realtime dari server.':'Data dibaca dari perangkat ini saja.'}</p>`;
 function gSel(i){GK=GL[i];GC=0;render();scrollTo(0,0)}
-function gBack(){tStop();GFULL=null;GU=0;GK=null;GC=0;V=S?'dash':'landing';render()}
-function gOpen(){const v=$('#gp').value;R=DB.root();if(v==(R.pin||'123456')){GU=1;V='guru';GK=null;render()}else toast('PIN salah')}
+function gBack(){tStop();GFULL=null;GU=0;GADM=0;GK=null;GC=0;V=S?'dash':'landing';render()}
+function gOpen(){const v=$('#gp').value,em=(($('#ge')||{}).value||'').trim().toLowerCase();if(v==GURU_PIN){GU=1;GADM=em===ADMIN?1:0;V='guru';GK=null;render()}else toast('PIN salah')}
 function gPin(){const v=$('#np').value.trim();if(v.length<4)return toast('PIN minimal 4 karakter');R=DB.root();R.pin=v;DB.put(R);$('#np').value='';toast('PIN guru diganti ✅')}
-function gDel(){const k=GK;R=DB.root();delete R.users[k];R.hist=(R.hist||[]).filter(h=>h.k!=k);if(R.cur==k){R.cur=null;S=null}DB.put(R);if(FBON)['detail','ringkas','presence'].forEach(x=>fdb.ref('mathlab9/'+x+'/'+k).remove());GK=null;GC=0;GFULL=null;render()}
+function gDel(){if(!GADM)return;const k=GK;R=DB.root();delete R.users[k];R.hist=(R.hist||[]).filter(h=>h.k!=k);if(R.cur==k){R.cur=null;S=null}DB.put(R);if(FBON)['detail','ringkas','presence'].forEach(x=>fdb.ref('mathlab9/'+x+'/'+k).remove());GK=null;GC=0;GFULL=null;render()}
+const gOn=k=>{const p=tP[k]||{};return !!(FBON&&p.isOnline&&Date.now()+fOff-(p.lastSeen||0)<100000)};
+const kelP=u=>GADM&&GC?`<div class="card kel"><h2 style="margin-top:0">⚙️ Kelola data siswa</h2><p class=mu>Hapus data siswa yang tidak dipakai. Progres, ringkasan, dan status online ikut terhapus. Tidak bisa dibatalkan. Jika siswa masih membuka aplikasi, datanya bisa muncul lagi.${gOn(u.k)?' <b>Siswa ini sedang online.</b>':''}</p>${GC==2?`<b>Yakin hapus permanen data ${esc(u.name)}?</b><div class=row style="margin-top:8px"><button class="btn dng" onclick="gDel()">Ya, hapus</button><button class="btn s" onclick="GC=1;render()">Tidak</button></div>`:`<div class=row><button class="btn s" onclick="GC=0;render()">Batal</button><button class="btn dng" onclick="GC=2;render()">🗑️ Hapus data siswa</button></div>`}</div>`:'';
+/* leaderboard */
+let LB=[],lbs=0;
+function lbDraw(){const e=$('#lb');if(!e)return;if(!FBON){e.innerHTML='<p class=mu style="text-align:center">Aktifkan Firebase untuk melihat leaderboard.</p>';return}if(!LB.length){e.innerHTML='<p class=mu style="text-align:center">Belum ada peringkat. Jadilah yang pertama!</p>';return}
+const pod=(x,i)=>x?`<div class="pd p${i+1}" style="--d:${[.35,.15,.55][i]}s"><div class=pcr>${i?'':'👑'}</div><div class=pav>${esc((x.name||'?').trim().charAt(0).toUpperCase())}<i>${['🥇','🥈','🥉'][i]}</i></div><b class=pnm>${esc(x.name)}</b><span class=pcl>${esc(x.kls)} · ${esc(x.sch)}</span><div class=pxp>${x.xp||0}<small>XP</small></div><div class=pbk>${i+1}</div></div>`:'<div class="pd ph"></div>';
+e.innerHTML=`<div class=podium>${pod(LB[1],1)}${pod(LB[0],0)}${pod(LB[2],2)}</div>`+LB.slice(3).map((x,j)=>`<div class=lr style="--d:${j*.07}s"><b class=rk>${j+4}</b><span class=rn><b>${esc(x.name)}</b><small>${esc(x.kls)} · ${esc(x.sch)}</small></span><b class=rx>${x.xp||0} XP</b></div>`).join('')}
+function lbSub(){if(FBON&&!lbs){lbs=1;fdb.ref('mathlab9/ringkas').orderByChild('xp').limitToLast(10).on('value',sn=>{const a=[];sn.forEach(c=>{a.push(c.val())});LB=a.reverse();lbDraw()},()=>{LB=[];lbDraw()})}setTimeout(lbDraw,0);return''}
+/* tema + confetti */
+const TH=[['royal','👑','Royal Gold'],['aurora','🌌','Aurora Neon'],['carnival','🎉','Carnival'],['emerald','💎','Emerald Luxe']];
+function thUI(){const c=document.documentElement.dataset.theme;$('#thm').innerHTML=`<button class=thb onclick="$('#thm').classList.toggle('open')" aria-label="Ganti tema">🎨</button><div class=thp>${TH.map(t=>`<button class="${t[0]==c?'on':''}" onclick="setTh('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('')}</div>`}
+function setTh(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('ml9theme',t)}catch(e){}thUI()}
+function confetti(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const c=document.createElement('canvas');c.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50';c.width=innerWidth;c.height=innerHeight;document.body.append(c);const x=c.getContext('2d'),cl=['#ff3d8b','#ffd23f','#22d3ee','#8b5cf6','#34d399','#ff8a3d'],p=Array.from({length:140},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,w:6+Math.random()*6,h:8+Math.random()*8,v:2+Math.random()*4,s:Math.random()*2-1,r:Math.random()*6,c:cl[Math.random()*6|0]}));let f=0;(function d(){x.clearRect(0,0,c.width,c.height);p.forEach(o=>{o.y+=o.v;o.x+=o.s*2;o.r+=.1;x.save();x.translate(o.x,o.y);x.rotate(o.r);x.fillStyle=o.c;x.fillRect(-o.w/2,-o.h/2,o.w,o.h);x.restore()});++f<240?requestAnimationFrame(d):c.remove()})()}
 function weakSubs(A,min){const m={};A.forEach(x=>{if(x.k==null)return;m[x.k]=m[x.k]||[0,0];m[x.k][1]++;if(x.ok)m[x.k][0]++});return Object.entries(m).filter(e=>e[1][1]>=min).sort((p,q)=>p[1][0]/p[1][1]-q[1][0]/q[1][1]).slice(0,6)}
 const wl=(w)=>w.length?`<div class=card>${w.map(([k,v])=>`<div class="row sp" style="margin-bottom:6px"><span>${sn(k)} <span class=mu>(Bab ${bbOf(k)+1})</span></span><span><b>${tc(pc(v[0],v[1]))}</b> <span class=mu>${v[1]} soal</span></span></div>`).join('')}</div>`:'<p class=mu>Belum cukup data (minimal beberapa soal per sub-bab).</p>';
 function gdet(u){const[o,n]=ac(u,()=>1),a=pc(o,n),sc=avg(u),g={};Object.entries(u.prog).forEach(([key,v])=>{const[k,L]=key.split('-');(g[k]=g[k]||{})[L]=v.best});
@@ -383,14 +465,14 @@ function gdet(u){const[o,n]=ac(u,()=>1),a=pc(o,n),sc=avg(u),g={};Object.entries(
  const subs=Object.keys(g).map(k=>`<div class=card><b>${sn(k)}</b> <span class=mu>(Bab ${bbOf(k)+1})</span><br>${[1,2,3].map(L=>`<span class=chip style="cursor:default">L${L}: ${g[k][L]==null?'–':tc(g[k][L])}</span>`).join('')}</div>`).join('')||'<p class=mu>Belum ada latihan yang diselesaikan.</p>';
  const lv=[1,2,3].map(L=>{const[oo,nn]=ac(u,x=>lvOf(x.qid)==L);return gbar(`Level ${L} — ${LN[L]}`,pc(oo,nn),nn)}).join('');
  const rs=u.res.slice(-10).reverse().map(r=>`<div class=card>${new Date(r.t).toLocaleDateString('id-ID')} · nilai <b>${r.sc}</b> (${r.n} soal)</div>`).join('')||'<p class=mu>Belum ada ulangan.</p>';
- return`<button class="btn s" onclick="GK=null;GC=0;GFULL=null;render()">← Semua siswa</button><h1 style="margin-top:12px">👤 ${esc(u.name)}</h1><p class=mu>${esc(u.sch||'-')} · Kelas ${esc(u.kls||'-')}</p>
+ return`<button class="btn s" onclick="GK=null;GC=0;GFULL=null;render()">← Semua siswa</button>${GADM?'<button class="btn y" style="margin-left:8px" onclick="GC=GC?0:1;render()">⚙️ Kelola</button>':''}${kelP(u)}<h1 style="margin-top:12px">👤 ${esc(u.name)}</h1><p class=mu>${esc(u.sch||'-')} · Kelas ${esc(u.kls||'-')} · ${gOn(u.k)?'🟢 Online':'⚪ Offline'}</p>
  <div class=grid><div class=card><div class=big>${n}</div><div class=mu>soal dikerjakan</div></div><div class=card><div class=big>${a==null?'–':a+'%'}</div><div class=mu>akurasi</div></div><div class=card><div class=big>${sc==null?'–':sc}</div><div class=mu>rata-rata ulangan</div></div><div class=card><div class=big>${u.xp}</div><div class=mu>XP · 🔥 ${stk(u.days)} hari</div></div><div class=card><div class=big>${u.wrong.length}</div><div class=mu>soal perlu diulang</div></div></div>
  <h2>Akurasi per bab</h2>${bab}<h2>Akurasi per level</h2>${lv}<h2>Sub-bab terlemah</h2>${wl(weakSubs(u.att,3))}<h2>Nilai latihan per sub-bab</h2>${subs}<h2>Riwayat ulangan</h2>${rs}
- <h2>Soal yang sering salah</h2>${wqTop(u.att)}<h2>Kelola</h2><div class=card>${GC?`Yakin menghapus semua data ${esc(u.name)}? <div class=row style="margin-top:8px"><button class=btn onclick="gDel()">Ya, hapus</button><button class="btn s" onclick="GC=0;render()">Batal</button></div>`:`<button class="btn s" onclick="GC=1;render()">🗑️ Hapus data siswa ini</button>`}</div>`}
+ <h2>Soal yang sering salah</h2>${wqTop(u.att)}`}
 const INP='width:100%;padding:12px;border-radius:14px;border:2px solid var(--ln);background:var(--card);color:var(--ink);font:700 1.1rem Nunito;margin-bottom:10px';
 const views={
-landing(){const H=R.hist||[];return`<div class=card style="text-align:center;padding:28px 18px;margin-top:8px"><div class=f style="font-size:2.4rem;font-weight:800">Math<span style="background:var(--y);color:#1d2455;border-radius:10px;padding:0 10px">Lab</span> IX</div><p style="font-size:1.1rem;margin:6px 0 16px">Latihan, tantangan, dan ulangan matematika kelas 9. Seperti bermain, tapi bikin makin jago.</p><div class=grid style="text-align:left"><div class=card>📚<br><b>Latihan bertahap</b><div class=mu>Bab → sub-bab → level, soal berurutan</div></div><div class=card>📝<br><b>Ulangan acak</b><div class=mu>Simulasi dengan timer dan nilai akhir</div></div><div class=card>📈<br><b>Progress tersimpan</b><div class=mu>XP, streak, dan badge</div></div></div></div>
-<div class=card><h2 style="margin-top:0">👋 Siapa yang mau belajar?</h2><div class=mu>Sekolah</div><select id=sch onchange="$('#sch2').style.display=this.value=='Lainnya'?'block':'none'" style="${INP}">${SCH.map(x=>`<option>${x}</option>`).join('')}</select><input id=sch2 maxlength=60 autocomplete=off placeholder="Ketik nama sekolahmu" style="${INP};display:none"><div class=mu>Kelas</div><select id=kls style="${INP}">${KLS.map(x=>`<option>${x}</option>`).join('')}</select><div class=mu>Nama</div><input id=ln maxlength=30 autocomplete=off placeholder="Ketik nama kamu" onkeydown="if(event.key=='Enter')doLogin()" style="${INP}"><button class=btn onclick="doLogin()">Masuk 🚀</button>${H.length?`<h3 style="margin-top:18px">Pernah masuk di perangkat ini</h3>${H.map((h,i)=>`<button class=chip onclick="loginHist(${i})">👤 ${esc(h.name)}${h.kls?' · '+esc(h.kls):''}${h.sch?`<br><small class=mu>${esc(h.sch)}</small>`:''}</button>`).join('')}`:''}<p class=mu style="margin-top:14px">Tanpa password. Pilih sekolah dan kelas yang sama, lalu nama yang sama setiap masuk agar progress-mu tersambung. ${FBON?'☁️ Progress tersimpan di server, bisa dilanjutkan dari perangkat mana pun.':'💾 Mode lokal: progress hanya di perangkat ini.'}</p><button class=chip onclick="go('guru')" style="margin:6px 0 0">👩‍🏫 Masuk sebagai guru</button></div>`},
+landing(){const H=R.hist||[];return`<div class="card hero9" style="text-align:center;padding:28px 18px;margin-top:8px"><div class=f style="font-size:2.4rem;font-weight:800">Math<span style="background:var(--y);color:#1d2455;border-radius:10px;padding:0 10px">Lab</span> IX</div><p style="font-size:1.1rem;margin:6px 0 16px">Latihan, tantangan, dan ulangan matematika kelas 9. Seperti bermain, tapi bikin makin jago.</p><div class=grid style="text-align:left"><div class=card>📚<br><b>Latihan bertahap</b><div class=mu>Bab → sub-bab → level, soal berurutan</div></div><div class=card>📝<br><b>Ulangan acak</b><div class=mu>Simulasi dengan timer dan nilai akhir</div></div><div class=card>📈<br><b>Progress tersimpan</b><div class=mu>XP, streak, dan badge</div></div></div></div>
+<div class=card><h2 style="margin-top:0">👋 Siapa yang mau belajar?</h2><div class=mu>Sekolah</div><select id=sch onchange="$('#sch2').style.display=this.value=='Lainnya'?'block':'none'" style="${INP}">${SCH.map(x=>`<option>${x}</option>`).join('')}</select><input id=sch2 maxlength=60 autocomplete=off placeholder="Ketik nama sekolahmu" style="${INP};display:none"><div class=mu>Kelas</div><select id=kls style="${INP}">${KLS.map(x=>`<option>${x}</option>`).join('')}</select><div class=mu>Nama</div><input id=ln maxlength=30 autocomplete=off placeholder="Ketik nama kamu" onkeydown="if(event.key=='Enter')doLogin()" style="${INP}"><button class=btn onclick="doLogin()">Masuk 🚀</button>${H.length?`<h3 style="margin-top:18px">Pernah masuk di perangkat ini</h3>${H.map((h,i)=>`<button class=chip onclick="loginHist(${i})">👤 ${esc(h.name)}${h.kls?' · '+esc(h.kls):''}${h.sch?`<br><small class=mu>${esc(h.sch)}</small>`:''}</button>`).join('')}`:''}<p class=mu style="margin-top:14px">Tanpa password. Pilih sekolah dan kelas yang sama, lalu nama yang sama setiap masuk agar progress-mu tersambung. ${FBON?'☁️ Progress tersimpan di server, bisa dilanjutkan dari perangkat mana pun.':'💾 Mode lokal: progress hanya di perangkat ini.'}</p><button class=chip onclick="go('guru')" style="margin:6px 0 0">👩‍🏫 Masuk sebagai guru</button></div><section class=lbw><div class=lbh><span>👑</span><h2>Leaderboard</h2><small>Top 10 · XP tertinggi</small></div><div id=lb></div></section>${lbSub()}`},
 dash(){const t=S.att.length,ok=S.att.filter(x=>x.ok).length,a=t?Math.round(ok/t*100):0,[l,ln]=slv(),L=S.last,w={};S.att.forEach(x=>{if(x.k){w[x.k]=w[x.k]||[0,0];w[x.k][1]++;if(!x.ok)w[x.k][0]++}});
  const weak=Object.entries(w).filter(e=>e[1][1]>=3).sort((p,q)=>q[1][0]/q[1][1]-p[1][0]/p[1][1])[0],done=Object.keys(S.prog).length;
  return`<div class="row sp"><h1>👋 Halo, ${esc(S.name)}!</h1><button class="btn s" onclick="logout()">🔄 Ganti nama / Keluar</button></div><p class=mu>${esc(S.sch||'')}${S.kls?' · Kelas '+esc(S.kls):''} · Waktunya menguji kemampuanmu!</p>
@@ -421,15 +503,16 @@ badge(){const A=[['🎯','First Step','Selesaikan latihan pertama',Object.keys(S
 val(){let tot=0,bad=[],ids=new Set,txt=new Set;KEYS.forEach(k=>[1,2,3].forEach(L=>{const b=bank(k,L);if(b.length<25)bad.push(`${sn(k)} L${L}: hanya ${b.length} soal`);b.forEach(q=>{tot++;const e=validateQuestion(q);if(ids.has(q.id))e.push('ID duplikat');if(txt.has(q.pertanyaan+(q.pairs?JSON.stringify(q.pairs):'')+(q.gambar||'')))e.push('soal duplikat');ids.add(q.id);txt.add(q.pertanyaan+(q.pairs?JSON.stringify(q.pairs):'')+(q.gambar||''));if(e.length)bad.push(q.id+': '+e.join(', '))})}));
  return`<h1>🧪 Question Validator</h1><div class=card><div class=big>✅ ${tot-bad.length} soal valid</div><div>${bad.length?'⚠️ '+bad.length+' soal perlu diperiksa':'Tidak ada masalah ditemukan'}</div><p class=mu>${KEYS.length} sub-bab × 3 level × 25 soal. Pemeriksaan: ID, soal & opsi duplikat, jawaban tepat satu, pembahasan, bab/level valid.</p>${bad.map(b=>`<div>⚠️ ${b}</div>`).join('')}</div>`}};
 Object.assign(views,{
-gpin(){return`<div class=card style="max-width:420px;margin:30px auto;text-align:center"><h2 style="margin-top:0">👩‍🏫 Mode Guru</h2><p class=mu>Masukkan PIN guru untuk membuka dashboard.</p><input id=gp type=password inputmode=numeric autocomplete=off placeholder="PIN" onkeydown="if(event.key=='Enter')gOpen()" style="${INP}"><div class=row style="justify-content:center"><button class=btn onclick="gOpen()">Buka</button><button class="btn s" onclick="gBack()">Kembali</button></div></div>`},
+gpin(){return`<div class=card style="max-width:420px;margin:30px auto;text-align:center"><h2 style="margin-top:0">👩‍🏫 Mode Guru</h2><p class=mu>Masukkan PIN guru untuk membuka dashboard.</p><input id=ge type=email autocomplete=email placeholder="Email guru (untuk akses Kelola)" onkeydown="if(event.key=='Enter')gOpen()" style="${INP}"><input id=gp type=password inputmode=numeric autocomplete=off placeholder="PIN" onkeydown="if(event.key=='Enter')gOpen()" style="${INP}"><div class=row style="justify-content:center"><button class=btn onclick="gOpen()">Buka</button><button class="btn s" onclick="gBack()">Kembali</button></div></div>`},
 guru(){R=DB.root();tStart();if(GK){const u=FBON?GFULL:R.users[GK];return ghead()+(u?gdet(u):'<div class=card>Memuat data siswa…</div>')}
  const all=FBON?Object.values(tS):Object.values(R.users),Ss=[...new Set([...SCH.slice(0,2),...all.map(x=>x.sch).filter(Boolean)])];
  return ghead()+`<div class=card style="font-size:.9rem">${FBON?'☁️ Terhubung ke Firebase (realtime).':'💾 Mode lokal: Firebase belum diisi, hanya data perangkat ini.'}</div><div class=grid id=gcards>${gCards()}</div>
  <h2>Monitoring siswa</h2><div class=row style="margin-bottom:10px"><select onchange="GF.sch=this.value;gUpd()" style="${SEL}"><option value="">Semua sekolah</option>${Ss.map(x=>`<option ${GF.sch==x?'selected':''}>${esc(x)}</option>`).join('')}</select><select onchange="GF.kls=this.value;gUpd()" style="${SEL}"><option value="">Semua kelas</option>${KLS.map(x=>`<option ${GF.kls==x?'selected':''}>${x}</option>`).join('')}</select><input placeholder="Cari nama siswa" value="${esc(GF.q)}" oninput="GF.q=this.value;gUpd()" style="${SEL};flex:1;min-width:160px"><label class=ck><input type=checkbox ${GF.on?'checked':''} onchange="GF.on=this.checked;gUpd()"> Hanya online</label></div>
- <div class=card style="padding:6px;overflow-x:auto"><table class=tb><tr><th>Status<th>Nama<th>Sekolah<th>Kelas<th>XP<th>Soal<th>Akurasi<th>Aksi</tr><tbody id=gtb>${gRows()}</tbody></table></div>`+pinCard()}});
+ <div class=card style="padding:6px;overflow-x:auto"><table class=tb><tr><th>Status<th>Nama<th>Sekolah<th>Kelas<th>XP<th>Soal<th>Akurasi<th>Aksi</tr><tbody id=gtb>${gRows()}</tbody></table></div>`}});
 function tg(k,v){const a=X[k],i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)}
 const NAV=[['dash','🏠','Beranda'],['mat','📚','Latihan'],['uji','📝','Ulangan'],['prog','📊','Progress'],['badge','🏆','Badge'],['val','🧪','Validator'],['guru','👩‍🏫','Guru'],['out','🚪','Keluar']];
-function render(){if(V=='guru'&&!GU)V='gpin';if(!S&&V!='guru'&&V!='gpin')V='landing';document.body.classList.toggle('lp',!S);$('#sb').innerHTML=!S?'':'<div class=lg>Math<i>Lab</i> IX</div><div class=who>👤 '+esc(S.name)+'</div>'+NAV.map(n=>`<button class="${(V==n[0]||(V=='play'||V=='result')&&n[0]=='mat')?'on':''}" onclick="${n[0]=='out'?'logout()':`go('${n[0]}')`}">${n[1]} ${n[2]}</button>`).join('');$('#app').innerHTML='<div class=mu style="font-size:.75rem;margin:0 0 8px">Dibuat oleh: Yusril Ainul Yakin, S.Pd</div>'+views[V]()}
+function render(){if(V=='guru'&&!GU)V='gpin';if(!S&&V!='guru'&&V!='gpin')V='landing';document.body.classList.toggle('lp',!S);$('#sb').innerHTML=!S?'':'<div class=lg>Math<i>Lab</i> IX</div><div class=who>👤 '+esc(S.name)+'</div>'+NAV.map(n=>`<button class="${(V==n[0]||(V=='play'||V=='result')&&n[0]=='mat')?'on':''}" onclick="${n[0]=='out'?'logout()':`go('${n[0]}')`}">${n[1]} ${n[2]}</button>`).join('');$('#app').innerHTML='<div class=mu style="font-size:.75rem;margin:0 0 8px">Dibuat oleh: Yusril Ainul Yakin, S.Pd</div>'+views[V]();if(V=='result'&&M&&M.sc>=70&&!M.cf){M.cf=1;confetti()}}
 render();
+{let t0='royal';try{t0=localStorage.getItem('ml9theme')||'royal'}catch(e){}setTh(TH.some(x=>x[0]==t0)?t0:'royal')}
 if(S){S.k=S.k||R.cur;if(FBON&&S.sch&&S.kls){fbQueue();startPresence()}}
 </script></body></html>
