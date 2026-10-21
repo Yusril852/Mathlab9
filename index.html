@@ -102,6 +102,7 @@ footer#cr{margin:40px 0 56px;padding:24px 16px;background:#0f172a;color:#cbd5e1;
 </style></head><body><nav id="sb"></nav><main id="app"></main><div id=thm></div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 /* ===== DATA: struktur bab/sub-bab (chapters, subchapters) ===== */
 const B=[['Bilangan Berpangkat dan Bentuk Akar','Bilangan Berpangkat|Sifat-Sifat Bilangan Berpangkat|Pangkat Nol dan Pangkat Negatif|Bentuk Akar|Operasi Bentuk Akar|Merasionalkan Penyebut|Pangkat Pecahan|Penerapan Bilangan Berpangkat dan Bentuk Akar'],
@@ -369,7 +370,7 @@ const FB_CFG={
   messagingSenderId: "895600575663",
   appId: "1:895600575663:web:8da1be8ff62a622998c05a"
 };
-let fdb=null,FBON=false,FSV=null,fOff=0;
+let fdb=null,FBON=false,FSV=null,fOff=0,authP=Promise.resolve();
 try{if(window.firebase&&!/ISI/.test(FB_CFG.databaseURL)){firebase.initializeApp(FB_CFG);fdb=firebase.database();FSV=firebase.database.ServerValue;FBON=true;fdb.ref('.info/serverTimeOffset').on('value',s=>fOff=s.val()||0)}}catch(e){console.warn('Firebase gagal:',e)}
 const SCH=['SMP Negeri 3 Kaliwungu','SMP IT Robbani','Lainnya'],KLS=['9A','9B','9C','9D','9E','9F','9G','9H'],SEL='padding:10px;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--ink);font:700 .95rem Nunito';
 if(!R.hist)R.hist=(R.recent||[]).map(n=>({k:n.toLowerCase(),name:n,sch:'',kls:''}));
@@ -460,10 +461,16 @@ const avg=u=>u.res.length?Math.round(u.res.reduce((s,r)=>s+r.sc,0)/u.res.length)
 const gbar=(t,p,n)=>`<div class=card><div class="row sp"><b>${t}</b><span>${tc(p)}${n!=null?' · '+n+' soal':''}</span></div>${bar(p||0)}</div>`;
 const ghead=()=>`<div class="row sp"><h1>👩‍🏫 Dashboard Guru</h1><div class=row><button class="btn s" onclick="render()">🔄 Muat ulang</button><button class="btn s" onclick="gBack()">Keluar mode guru</button></div></div><p class=mu>${FBON?'Data realtime dari server.':'Data dibaca dari perangkat ini saja.'}</p>`;
 function gSel(i){GK=GL[i];GC=0;render();scrollTo(0,0)}
-function gBack(){tStop();GFULL=null;GU=0;GADM=0;GK=null;GC=0;V=S?'dash':'landing';render()}
-function gOpen(){const v=$('#gp').value,em=(($('#ge')||{}).value||'').trim().toLowerCase();if(v==GURU_PIN){GU=1;GADM=em===ADMIN?1:0;V='guru';GK=null;render()}else toast('PIN salah')}
+function gBack(){try{FBON&&firebase.auth().signOut()}catch(e){}tStop();GFULL=null;GU=0;GADM=0;GK=null;GC=0;V=S?'dash':'landing';render()}
+function gOpen(){const v=$('#gp').value,em=(($('#ge')||{}).value||'').trim().toLowerCase(),ok=v==GURU_PIN,go2=a=>{GU=1;GADM=a?1:0;V='guru';GK=null;render()};
+if(em!==ADMIN||!FBON){if(ok)go2(0);else toast('PIN salah');return}
+toast('Memverifikasi admin…');const au=firebase.auth(),fin=r=>{const a=((r&&r.user&&r.user.email)||'').toLowerCase()===ADMIN;if(!a){au.signOut();toast('Akun yang dipakai bukan '+ADMIN)}go2(a)};
+authP=au.signInWithEmailAndPassword(em,v).then(fin,()=>{if(!ok){toast('PIN salah');authP=Promise.resolve();return null}
+return au.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(fin,e=>{authP=Promise.resolve();go2(0);toast('Login admin gagal ('+((e&&e.code)||'error')+')')})})}
 function gPin(){const v=$('#np').value.trim();if(v.length<4)return toast('PIN minimal 4 karakter');R=DB.root();R.pin=v;DB.put(R);$('#np').value='';toast('PIN guru diganti ✅')}
-function gDel(){if(!GADM)return;const k=GK;R=DB.root();delete R.users[k];R.hist=(R.hist||[]).filter(h=>h.k!=k);if(R.cur==k){R.cur=null;S=null}DB.put(R);if(FBON)['detail','ringkas','presence'].forEach(x=>fdb.ref('mathlab9/'+x+'/'+k).remove());GK=null;GC=0;GFULL=null;render()}
+async function gDel(){if(!GADM)return;const k=GK;
+if(FBON){try{await authP;await Promise.all(['detail','ringkas','presence'].map(x=>fdb.ref('mathlab9/'+x+'/'+k).remove()))}catch(e){toast('Gagal hapus ('+((e&&e.code)||'error')+'). Pastikan login admin dan rules sudah dipublish');return}}
+R=DB.root();delete R.users[k];R.hist=(R.hist||[]).filter(h=>h.k!=k);if(R.cur==k){R.cur=null;S=null}DB.put(R);GK=null;GC=0;GFULL=null;render()}
 const gOn=k=>{const p=tP[k]||{};return !!(FBON&&p.isOnline&&Date.now()+fOff-(p.lastSeen||0)<100000)};
 const kelP=u=>GADM&&GC?`<div class="card kel"><h2 style="margin-top:0">⚙️ Kelola data siswa</h2><p class=mu>Hapus data siswa yang tidak dipakai. Progres, ringkasan, dan status online ikut terhapus. Tidak bisa dibatalkan. Jika siswa masih membuka aplikasi, datanya bisa muncul lagi.${gOn(u.k)?' <b>Siswa ini sedang online.</b>':''}</p>${GC==2?`<b>Yakin hapus permanen data ${esc(u.name)}?</b><div class=row style="margin-top:8px"><button class="btn dng" onclick="gDel()">Ya, hapus</button><button class="btn s" onclick="GC=1;render()">Tidak</button></div>`:`<div class=row><button class="btn s" onclick="GC=0;render()">Batal</button><button class="btn dng" onclick="GC=2;render()">🗑️ Hapus data siswa</button></div>`}</div>`:'';
 /* leaderboard */
